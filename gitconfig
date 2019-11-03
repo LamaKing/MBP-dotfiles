@@ -1,0 +1,14 @@
+[user]
+    name    =   Andrea Silva   
+    email   =   andreasilva759@gmail.com
+[github]
+    user    =  LamaKing 
+    email   =  andreasilva759@gmail.com 
+[color]
+    ui      =   auto
+[core]
+    editor  =   vim
+[url "ssh://git@github.com/"]
+    insteadOf = https://github.com/
+[alias]
+    l = log --color --abbrev-commit --graph --decorate --relative-date

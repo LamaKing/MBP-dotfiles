@@ -1,0 +1,20 @@
+# Python startup config file
+
+import atexit, os, sys
+import rlcompleter, readline
+from math import *
+import numpy as np
+
+# Add 
+#sys.path.append(os.getenv("HOME")+"/bin/")
+
+readline.parse_and_bind('tab:complete')
+historyPath = os.path.expanduser("~/.pyhistory")
+
+def save_history(historyPath=historyPath):
+   readline.write_history_file(historyPath)
+
+if os.path.exists(historyPath):
+   readline.read_history_file(historyPath)
+
+atexit.register(save_history)
