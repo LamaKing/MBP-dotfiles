@@ -2,15 +2,29 @@
 
 import atexit, os, sys
 import rlcompleter, readline
-from math import *
-import numpy as np
 
-# Add 
-#sys.path.append(os.getenv("HOME")+"/bin/")
+# Not sure this is a good idea
+from math import *
+
+# Import NumPy 
+import numpy as np
+from numpy.linalg import norm
+
+# Load  Atomic Simulation Environment
+import ase
+from ase import Atom, Atoms
+from ase.io import read as ase_read
+from ase.build import sort as ase_sort
+
+import matplotlib.pyplot as plt
+
+# Add local bin to the path
+sys.path.append(os.getenv("HOME")+"/bin/")
 
 readline.parse_and_bind('tab:complete')
-historyPath = os.path.expanduser("~/.pyhistory")
 
+# Set up history
+historyPath = os.path.expanduser("~/.pyhistory")
 def save_history(historyPath=historyPath):
    readline.write_history_file(historyPath)
 
