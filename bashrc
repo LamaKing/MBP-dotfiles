@@ -86,8 +86,8 @@ PS1="$PS1"' \[$RESET\]$ '
 #------------------------------------------------------------------------------
 # PYTHON CONFIG
 #------------------------------------------------------------------------------
+# Execute Python start up script to set up config
 export PYTHONSTARTUP="$HOME/.pythonrc"
-export PYTHONPATH="$HOME/bin:$PYTHONPATH:/Users/andreasilva/phd/software/lammps/lammps-12Dec18/python"
 
 #------------------------------------------------------------------------------
 # MISC
