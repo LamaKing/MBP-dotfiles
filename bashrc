@@ -39,6 +39,17 @@ if [ -x /usr/bin/dircolors ]; then
 fi
 
 #------------------------------------------------------------------------------
+# MISC
+#------------------------------------------------------------------------------
+# Set default text editor:
+export EDITOR="/usr/bin/vim"
+# Set LD correctly for LAMMPS
+export LD_LIBRARY_PATH="${LD_LIBRARY_PATH}:/Users/andreasilva/phd/software/lammps/lammps-12Dec18/src"
+#eval "$(_VERDI_COMPLETE=source verdi)" # Autocomplete for verdi aiiida
+# Enable bash completion for git
+source /usr/local/share/zsh/site-functions/git-completion.bash
+
+#------------------------------------------------------------------------------
 # SETUP HISTORY
 #------------------------------------------------------------------------------
 # From Tsh
@@ -70,17 +81,22 @@ WHITE="$(tput setaf 7)"
 #------------------------------------------------------------------------------
 # DEFINE CUSTOM PROMPT
 #------------------------------------------------------------------------------
+# Define base colored PS1
+# It should look something like "<use> in <last dir in PWD> $"
 PS1='\[$BOLD\]\[$BLUE\]\u\[$WHITE\] in \[$GREEN\]\W'
-# Custom bash prompt
+
+# Signal bash via ssh connection at the end of PS1
 if [[ -n "${SSH_CONNECTION:-}" ]]
 then
     PS1="$PS1"'\[$RESET\]\[$CYAN\] [ssh]'
 fi
-# Custom bash prompt
-if type -t __git_ps1 &>/dev/null  
-then  
-    PS1="$PS1"'\[$RESET\]\[$CYAN\]$(__git_ps1 " [%s]")'
-fi
+
+# If in git repo, put branch name in PS1
+# Put '*' for unstaged changes and '+' for staged-not-commited changes
+GIT_PS1_SHOWDIRTYSTATE=true 
+export PS1="$PS1"'\[$RESET\]\[$CYAN\]$(__git_ps1 " [%s]")'
+
+# Reset color at the end of PS1
 PS1="$PS1"' \[$RESET\]$ '
 
 #------------------------------------------------------------------------------
@@ -90,28 +106,21 @@ PS1="$PS1"' \[$RESET\]$ '
 export PYTHONSTARTUP="$HOME/.pythonrc"
 
 #------------------------------------------------------------------------------
-# MISC
-#------------------------------------------------------------------------------
-export EDITOR="/usr/bin/vim"
-export LD_LIBRARY_PATH="${LD_LIBRARY_PATH}:/Users/andreasilva/phd/software/lammps/lammps-12Dec18/src"
-#eval "$(_VERDI_COMPLETE=source verdi)" # Autocomplete for verdi aiiida
-
-#------------------------------------------------------------------------------
 # ALIASES
 #------------------------------------------------------------------------------
 # Add option to commands
-alias echo="echo -e" # Proper formatted version. REMEMBER: it's only in your shell, not script
-alias vim="vim -p" # Open things in tabs
+alias echo="echo -e" # Proper formatted version. 
+alias vim="vim -p" # Open files in tabs
 # Generic shortcuts
 alias ll="ls -l"
 alias la="ls -la"
-alias lt="ls -lhrt"
-alias vgrep="grep -v grep | grep " 
+alias lt="ls -lhrt" # List in reverse time order and human-readable size
 alias ip3="ipython3"
 
 #------------------------------------------------------------------------------
 # DEFINE PATH
 #------------------------------------------------------------------------------
+# User executables and modules
 if [ -d "$HOME/bin" ] ; then
     PATH="$HOME/bin:$PATH"
 fi
