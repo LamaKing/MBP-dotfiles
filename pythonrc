@@ -19,7 +19,9 @@ from ase.build import sort as ase_sort
 import matplotlib.pyplot as plt
 
 # Add local bin to the path
-sys.path.append(os.getenv("HOME")+"/bin/")
+#sys.path.append(os.getenv("HOME")+"/bin/")
+# Already defined in .bashrc $PYTHONPATH
+# And this script is not loaded from .py script
 
 readline.parse_and_bind('tab:complete')
 
