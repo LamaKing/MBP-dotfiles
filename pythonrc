@@ -1,21 +1,23 @@
 # Python startup config file
 
+# Import generally useful modules
 import atexit, os, sys
 import rlcompleter, readline
 
 # Not sure this is a good idea
 from math import *
 
-# Import NumPy 
+# Import NumPy and heavely used functions
 import numpy as np
 from numpy.linalg import norm
 
-# Load  Atomic Simulation Environment
+# Load  Atomic Simulation Environment and common functions
 import ase
 from ase import Atom, Atoms
 from ase.io import read as ase_read
 from ase.build import sort as ase_sort
 
+# Import Pyplot for plotting
 import matplotlib.pyplot as plt
 
 # Add local bin to the path

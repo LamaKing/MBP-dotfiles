@@ -8,7 +8,11 @@
     ui      =   auto
 [core]
     editor  =   vim
+    excludesfile = /home/as7g17/.gitignore_global
 [url "ssh://git@github.com/"]
     insteadOf = https://github.com/
 [alias]
+    # Nice log display
     l = log --color --abbrev-commit --graph --decorate --relative-date
+    # Push to all remote at once
+    pushall = !git remote | xargs -L1 git push --all

@@ -45,9 +45,11 @@ fi
 export EDITOR="/usr/bin/vim"
 # Set LD correctly for LAMMPS
 export LD_LIBRARY_PATH="${LD_LIBRARY_PATH}:/Users/andreasilva/phd/software/lammps/lammps-12Dec18/src"
-#eval "$(_VERDI_COMPLETE=source verdi)" # Autocomplete for verdi aiiida
-# Enable bash completion for git
-source /usr/local/share/zsh/site-functions/git-completion.bash
+
+# Enable bash completion
+if [ -f /etc/bash_completion ]; then
+ . /etc/bash_completion
+fi
 
 #------------------------------------------------------------------------------
 # SETUP HISTORY
@@ -81,24 +83,36 @@ WHITE="$(tput setaf 7)"
 #------------------------------------------------------------------------------
 # DEFINE CUSTOM PROMPT
 #------------------------------------------------------------------------------
-# Define base colored PS1
-# It should look something like "<use> in <last dir in PWD> $"
-PS1='\[$BOLD\]\[$BLUE\]\u\[$WHITE\] in \[$GREEN\]\W'
+if [ "$TERM" != "dumb" ] ; then 
+   BOLD="$(tput bold)"
+   RESET="$(tput sgr0)"
 
-# Signal bash via ssh connection at the end of PS1
-if [[ -n "${SSH_CONNECTION:-}" ]]
-then
-    PS1="$PS1"'\[$RESET\]\[$CYAN\] [ssh]'
+   RED="$(tput setaf 1)"
+   GREEN="$(tput setaf 2)"
+   YELLOW="$(tput setaf 3)"
+   BLUE="$(tput setaf 4)"
+   MAGENTA="$(tput setaf 5)"
+   CYAN="$(tput setaf 6)"
+   WHITE="$(tput setaf 7)"
+
+
+   # Custom bash prompt
+   PS1='\[$BOLD\]\[$BLUE\]\u\[$WHITE\] in \[$GREEN\]\W'
+   #PS1="\u in \W : "
+
+   if [[ -n "${SSH_CONNECTION:-}" ]]
+   then
+       PS1="$PS1"'\[$RESET\]\[$CYAN\] [ssh]'
+   fi
+
+   if type -t __git_ps1 &>/dev/null  
+   then  
+       PS1="$PS1"'\[$RESET\]\[$CYAN\]$(__git_ps1 " [%s]")'
+   fi
 fi
 
-# If in git repo, put branch name in PS1
-# Put '*' for unstaged changes and '+' for staged-not-commited changes
-GIT_PS1_SHOWDIRTYSTATE=true 
-export PS1="$PS1"'\[$RESET\]\[$CYAN\]$(__git_ps1 " [%s]")'
-
-# Reset color at the end of PS1
+# End prompt
 PS1="$PS1"' \[$RESET\]$ '
-
 #------------------------------------------------------------------------------
 # PYTHON CONFIG
 #------------------------------------------------------------------------------
@@ -144,11 +158,8 @@ if [ -f "$HOME/.bash_machine" ] ; then
    source "$HOME/.bash_machine"
 fi
 # Sensible info
-if [ -f "$HOME/.bash_machine" ] ; then
+if [ -f "$HOME/.bash_secrets" ] ; then
    source "$HOME/.bash_secrets"
 fi
 
-# I forgo the computer unlocked while having a coffe with Paolo.
-# Victor, rightfully, took advantage of the situation.
-# This is a reminder of your careless behaviour! A. 13.09.19
-figlet PINEAPPLE PIZZA  
+
