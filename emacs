@@ -13,9 +13,8 @@
  '(custom-enabled-themes (quote (deeper-blue)))
  '(package-selected-packages
    (quote
-    (pungi exec-path-from-shell auto-virtualenv jedi company-jedi)))
- '(show-paren-mode t)
- )
+    (markdown-mode pungi exec-path-from-shell auto-virtualenv jedi company-jedi)))
+ '(show-paren-mode t))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
@@ -24,7 +23,7 @@
  )
 
 ;;---------------------------------------------------------------------------------------
-;; ORG mode 
+;; ORG mode
 ;;---------------------------------------------------------------------------------------
 (require 'org)
 (define-key global-map "\C-cl" 'org-store-link)
@@ -43,13 +42,13 @@
    ("CANCELED" .  "blue")))
 
 ;;---------------------------------------------------------------------------------------
-;; Miscellaneous 
+;; Miscellaneous
 ;;---------------------------------------------------------------------------------------
 ;; Highligh matching parentesis
 (show-paren-mode 1)
 
-;; no startup msg  
-(setq inhibit-startup-message t)        ; Disable startup message 
+;; no startup msg
+(setq inhibit-startup-message t)        ; Disable startup message
 
 ;; OsX Italian keyboard: cmd, not ctrl as command and alt as modifier (brakets and hastag)
 (setq ns-command-modifier 'meta)
@@ -84,7 +83,7 @@
    version-control t)       ; use versioned backups
 
 ;;---------------------------------------------------------------------------------------
-;; Packages manager 
+;; Packages manager
 ;;---------------------------------------------------------------------------------------
 ;; packages
 (when (>= emacs-major-version 24)
@@ -103,9 +102,17 @@
 ;;---------------------------------------------------------------------------------------
 ;; SSH service config
 ;;---------------------------------------------------------------------------------------
-;; TRAMP 
+;; TRAMP
 (require 'tramp)
 ;; (custom-set-variables '(tramp-verbose 0))
 (setq tramp-debug-buffer t)
 ;; Escape properly: if you have custom prompt TRAMP may hang waiting for a good shell. Escape your custom shit.
-(setq shell-prompt-pattern "\\(?:^\\|\r\\)[^]#$%>\n]*#?[]#$%>].* *\\(^[\\[[0-9;]*[a-zA-Z] *\\)*" ) 
+(setq shell-prompt-pattern "\\(?:^\\|\r\\)[^]#$%>\n]*#?[]#$%>].* *\\(^[\\[[0-9;]*[a-zA-Z] *\\)*" )
+
+;;---------------------------------------------------------------------------------------
+;; MARKDOWN MODE (README.md)
+;;---------------------------------------------------------------------------------------
+(require 'package)
+(add-to-list 'package-archives
+             '("melpa-stable" . "https://stable.melpa.org/packages/"))
+(package-initialize)
