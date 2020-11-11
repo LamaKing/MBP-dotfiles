@@ -65,3 +65,5 @@ if [ -f "$HOME/.bash_secrets" ] ; then
    source "$HOME/.bash_secrets"
 fi
 
+# Shortcut to important folders
+alias sissa_home="cd ~/Documents/Post_doc-SISSA/"
