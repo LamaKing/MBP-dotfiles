@@ -60,9 +60,8 @@ if [ -f $(brew --prefix)/etc/bash_completion ]; then
     . $(brew --prefix)/etc/bash_completion
 fi
 
-#------------------------------------------------------------------------------
-# VASPRUN
-#------------------------------------------------------------------------------
- 
-export VASPPP="/Users/andreasilva/phd/software/VASP5_psps/POT_GGA_PAW_PBE"
+# Sensible info
+if [ -f "$HOME/.bash_secrets" ] ; then
+   source "$HOME/.bash_secrets"
+fi
 

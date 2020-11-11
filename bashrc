@@ -143,10 +143,6 @@ fi
 if [ -f "$HOME/.bash_machine" ] ; then
    source "$HOME/.bash_machine"
 fi
-# Sensible info
-if [ -f "$HOME/.bash_machine" ] ; then
-   source "$HOME/.bash_secrets"
-fi
 
 # I forgo the computer unlocked while having a coffe with Paolo.
 # Victor, rightfully, took advantage of the situation.
