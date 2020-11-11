@@ -152,3 +152,20 @@ fi
 # Victor, rightfully, took advantage of the situation.
 # This is a reminder of your careless behaviour! A. 13.09.19
 figlet PINEAPPLE PIZZA  
+
+# Start ssh-agent
+# Check if the ssh-agent is already running
+if [[ "$(ps -u $USER | grep ssh-agent | wc -l)" -lt "2" ]]; then
+    echo "$(date +%F@%T) - SSH-AGENT: Agent will be started"
+	# Start the ssh-agent and redirect the environment variables into a file
+    ssh-agent -s > $HOME/.ssh/ssh-agent
+    # Load the environment variables from the file
+    . ~/.ssh/ssh-agent >/dev/null
+    # Add the default key to the ssh-agent
+    ssh-add ~/.ssh/id_rsa_ir5
+    ssh-add ~/.ssh/id_rsa_marvin
+    ssh-add ~/.ssh/id_rsa_sissa
+else
+    echo "$(date +%F@%T) - SSH-AGENT: Agent already running"
+    . ~/.ssh/ssh-agent >/dev/null
+fi
