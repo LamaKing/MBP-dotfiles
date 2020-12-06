@@ -44,11 +44,9 @@ fi
 # Set default text editor:
 export EDITOR="/usr/bin/vim"
 # Set LD correctly for LAMMPS
-export LD_LIBRARY_PATH="${LD_LIBRARY_PATH}:/Users/andreasilva/phd/software/lammps/lammps-12Dec18/src"
-#eval "$(_VERDI_COMPLETE=source verdi)" # Autocomplete for verdi aiiida
+#export LD_LIBRARY_PATH="${LD_LIBRARY_PATH}:/Users/andreasilva/phd/software/lammps/lammps-12Dec18/src"
 # Enable bash completion for git
-source /usr/local/share/zsh/site-functions/git-completion.bash
-
+source /usr/share/git-core/contrib/completion/git-prompt.sh 
 #------------------------------------------------------------------------------
 # SETUP HISTORY
 #------------------------------------------------------------------------------
@@ -143,29 +141,20 @@ fi
 if [ -f "$HOME/.bash_machine" ] ; then
    source "$HOME/.bash_machine"
 fi
-# Sensible info
-if [ -f "$HOME/.bash_machine" ] ; then
-   source "$HOME/.bash_secrets"
-fi
 
-# I forgo the computer unlocked while having a coffe with Paolo.
-# Victor, rightfully, took advantage of the situation.
-# This is a reminder of your careless behaviour! A. 13.09.19
-figlet PINEAPPLE PIZZA  
-
-# Start ssh-agent
-# Check if the ssh-agent is already running
-if [[ "$(ps -u $USER | grep ssh-agent | wc -l)" -lt "2" ]]; then
-    echo "$(date +%F@%T) - SSH-AGENT: Agent will be started"
-	# Start the ssh-agent and redirect the environment variables into a file
-    ssh-agent -s > $HOME/.ssh/ssh-agent
-    # Load the environment variables from the file
-    . ~/.ssh/ssh-agent >/dev/null
-    # Add the default key to the ssh-agent
-    ssh-add ~/.ssh/id_rsa_ir5
-    ssh-add ~/.ssh/id_rsa_marvin
-    ssh-add ~/.ssh/id_rsa_sissa
-else
-    echo "$(date +%F@%T) - SSH-AGENT: Agent already running"
-    . ~/.ssh/ssh-agent >/dev/null
-fi
+# # Start ssh-agent
+# # Check if the ssh-agent is already running
+# if [[ "$(ps -u $USER | grep ssh-agent | wc -l)" -lt "2" ]]; then
+#     echo "$(date +%F@%T) - SSH-AGENT: Agent will be started"
+# 	# Start the ssh-agent and redirect the environment variables into a file
+#     ssh-agent -s > $HOME/.ssh/ssh-agent
+#     # Load the environment variables from the file
+#     . ~/.ssh/ssh-agent >/dev/null
+#     # Add the default key to the ssh-agent
+#     ssh-add ~/.ssh/id_rsa_ir5
+#     ssh-add ~/.ssh/id_rsa_marvin
+#     ssh-add ~/.ssh/id_rsa_sissa
+# else
+#     echo "$(date +%F@%T) - SSH-AGENT: Agent already running"
+#     . ~/.ssh/ssh-agent >/dev/null
+# fi
